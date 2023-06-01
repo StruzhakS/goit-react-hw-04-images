@@ -1,0 +1,12 @@
+.Error {
+  margin: 0 auto;
+  color: rgba(196, 194, 194, 0.711);
+  margin-top: 100px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.text {
+  background-color: rgba(152, 152, 152, 0.842);
+  color: white;
+}
