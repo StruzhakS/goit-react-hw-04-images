@@ -14,7 +14,6 @@ export async function searchImages(query, page = 1) {
         per_page: 12,
       },
     });
-    // console.log(response.data);
     if (response.data.hits.length === 0) {
       throw new Error();
     }

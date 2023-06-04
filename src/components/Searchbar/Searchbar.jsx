@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import s from './Searchbar.module.css';
 import Notiflix from 'notiflix';
 
@@ -9,43 +9,41 @@ Notiflix.Notify.init({
   timeout: '2000',
 });
 
-class Searchbar extends Component {
-  state = {
-    userInput: '',
-  };
-  handleSubmit = e => {
+function Searchbar({ userSearch }) {
+  const [userInput, setUserInput] = useState('');
+
+  const handleSubmit = e => {
     e.preventDefault();
-    if (this.state.userInput) {
-      this.props.onSubmit(this.state.userInput);
-      this.setState({ userInput: '' });
+    if (userInput) {
+      userSearch(userInput);
+      setUserInput('');
       return;
     }
     Notiflix.Notify.info('Please enter a picture name');
   };
 
-  handleInput = e => {
-    this.setState({ userInput: e.currentTarget.value.toLowerCase() });
+  const handleInput = e => {
+    setUserInput(e.currentTarget.value.toLowerCase());
   };
 
-  render() {
-    return (
-      <header className={s.Searchbar}>
-        <form className={s.SearchForm} onSubmit={e => this.handleSubmit(e)}>
-          <input
-            onChange={this.handleInput}
-            className={s.SearchFormInput}
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            value={this.state.userInput}
-          />
-          <button type="submit" className={s.SearchFormButton}>
-            <span className={s.SearchFormButtonLabel}>Search</span>
-          </button>
-        </form>
-      </header>
-    );
-  }
+  return (
+    <header className={s.Searchbar}>
+      <form className={s.SearchForm} onSubmit={e => handleSubmit(e)}>
+        <input
+          onChange={handleInput}
+          className={s.SearchFormInput}
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+          value={userInput}
+        />
+        <button type="submit" className={s.SearchFormButton}>
+          <span className={s.SearchFormButtonLabel}>Search</span>
+        </button>
+      </form>
+    </header>
+  );
 }
+
 export default Searchbar;
