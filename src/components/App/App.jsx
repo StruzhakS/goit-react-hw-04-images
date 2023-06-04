@@ -28,10 +28,10 @@ function App() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (!categoryName) {
       return;
     }
-
     getSearchPictures();
     return;
   }, [categoryName, page]);
